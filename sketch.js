@@ -1,45 +1,55 @@
-var speed,weight,deform;
-speed = random(40,100);
-weight= random(150,1500);
 var car,wall;
+var speed,weight;
+var deformation;
+
 
 function setup() {
   createCanvas(1600,400);
 
-  car= createSprite(50, 200, 50, 50);
- car.velocityX=speed;
+  speed= random(50,100);
+  weight= random(500,1000);
 
-  wall= createSprite(1500, 200, 60, height/2);
-  wall.shapecolour=('80,80,80');
-
-}
-
-
-function deformation(){
-  if(car.isTouching(wall)){
-    deform = 0.5*weight*speed*speed/22500;
-  }
-
-  if(deform<100){
-    car.shapecolour='green';
-  }
-
-  else if(deform>100&&deform<180){
-    car.shapecolour='yellow';
-  }
-
-  else if (deform>180){
-    car.shapecolour='red';
-  }
-}
-
-
-
-function draw() {
-  background(255,255,255);  
-  drawSprites();
-  
-  deformation();
+ car=createSprite(40, 200, 50, 50);
+ wall=createSprite(1500, 200, 50, height*2);
+wall=color(80,80,80);
+ 
+car.velocityX=speed;
 
  
+}
+
+function deform(){
+  if(car.isTouching(wall)){
+  deformation= 0.5*weight*speed*speed/22500
+  }
+}
+
+function tree(){
+  if(deformation<100){
+    car=color(0,225,0);
+  }
+}
+
+function yellow(){
+  if(deformation>100 && deformation<180){
+    car=color(230,230,0);
+  }
+}
+
+function crimson (){
+  if(deformation>180){
+    car=color(225,0,0);
+  }
+}
+
+function draw() {
+  background(255,255,255); 
+  
+  deform();
+  tree();
+  yellow();
+  crimson();
+
+  drawSprites();
+
 }
